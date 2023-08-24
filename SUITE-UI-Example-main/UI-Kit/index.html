@@ -17,12 +17,33 @@
 
     <!-- 이곳에는 일반적으로 정보를 표시합니다. -->
     <content-area>
-      <layout-center>
-        <header-text>
-          안녕하세요, 반가워요!<br>
-          SUITE-UI SDK 예제를 사용하여<br>다양한 어플리케이션을 만들어보세요!
-        </header-text>
-      </layout-center>
+      <row-area>
+        <row-split>
+              <div style="
+              width: 100%;
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              padding-left: 95px;
+              display: flex;">
+                <header-text style="font-size: 35px;" id="mealtext">
+                </header-text>
+            </div>
+        </row-split>
+
+        <row-split>
+          <div style="height: 100%;background-color: rgba(0, 0, 255, 0);
+          color: rgb(228, 228, 228);
+          display: flex;
+          flex-wrap: nowrap;
+          white-space:nowrap;
+          font-size: 170px;
+          font-weight: 700;
+          align-items: center;
+          padding-left: 75px;" id="mealTime">
+          </div>
+        </row-split>
+    </row-area>
     </content-area>
 
     <!-- 이곳에는 기본적인 조작 요소가 배치됩니다. -->
@@ -31,33 +52,62 @@
       <top-control>
         <back-button>
           <back-button-icon></back-button-icon>
-          <back-button-label>바탕화면</back-button-label>
+          <back-button-label>뒤로가기</back-button-label>
         </back-button>
       </top-control>
 
       <middle-control>
         
         <layout-split-7>
-          <layout-center>
-            <header-text>어때요, 쉽죠?</header-text>
-          </layout-center>
+          <div style="position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);">
+            <div style="
+            width: 320px;
+            height: 110px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);"
+            onclick="">
+              <layout-center style="font-size: 55px;font-weight: 600;">
+                <input type="date" id="inputdate" style="
+                border: 0px;
+                background-color: #f2f2f2;
+                width: 320px;
+                height: 110px;
+                border-radius: 30px;
+                font-size: 35px;
+                font-weight: 800;
+                font-family: 'SUITE Variable', sans-serif;
+                text-align: center;
+                position: relative;
+                ">  
+              </layout-center>
+            </div>
+          </div>
         </layout-split-7>
 
         <layout-split-4>
+          
           <row-split>
 
             <margin-button-l>
-              <primary-button>
-                <button-label>넹 쉬워요</button-label>
-              </primary-button>
+              <primary-button
+              onclick="
+                apply_meal();
+            ">
+              <button-label>적용</button-label>
+            </primary-button>
             </margin-button-l>
 
           </row-split>
 
-          <row-split>
+            <row-split>
 
-            <margin-button-r>
-              <secondary-button
+              <margin-button-r>
+                <secondary-button
                 onclick="
                   alert_create(
                     'alert_id_001',
@@ -67,12 +117,12 @@
                     [['공식 문서', 'primary'], ['알겠어요,', 'secondary']],
                     [['', ''], ['alert_close', '`alert_id_001`']]);
               ">
-                <button-label>아뇽 어려운디;;</button-label>
+                <button-label>더보기</button-label>
               </secondary-button>
-            </margin-button-r>
-
-          </row-split>
-
+              </margin-button-r>
+              
+            </row-split>
+          
         </layout-split-4>
 
       </middle-control>
@@ -82,6 +132,7 @@
   </app-layout>
 
   <script src="./script/SDK.js"></script>         <!-- SDK 요소와 연결되어 있습니다. 제거하지 마세요. -->
+  <script src="./script/meal.js"></script>
 
 </body>
 

@@ -8,31 +8,13 @@ const AOSC = "N10"
 // 이 곳에 표준학교 코드를 입력하세요.
 const SSC = "8140472"
 
-const today = new Date();
-const year = today.getFullYear();
-const month = String(today.getMonth() + 1).padStart(2, '0');
-const day = String(today.getDate()).padStart(2, '0');
-
-datee = document.getElementById("inputdate").value;
-datee = datee.replace(/-/g, '');
-todaydate = datee;
-
-// API 요청 URL
-const API_URL = `https://open.neis.go.kr/hub/mealServiceDietInfo?\
-KEY=${APIKey}\
-&Type=json\
-&ATPT_OFCDC_SC_CODE=${AOSC}\
-&SD_SCHUL_CODE=${SSC}\
-&MLSV_FROM_YMD=${todaydate}\
-&MLSV_TO_YMD=${todaydate}`;
-
 // 정규식으로 알레르기 정보 제거
 function RX(item) {
     return item.replace(/\([^)]*\)/g, '');
 }
 
 // 당일 급식 정보 반환
-async function todayMeal() {
+async function todayMeal(API_URL) {
     response = await fetch(API_URL);
     result = await response.json();
     mealData = result.mealServiceDietInfo[1];
@@ -45,31 +27,33 @@ async function todayMeal() {
         
         mealInfo.push([mealTime, mealList]);
     });
-
     return mealInfo;
 }
 
-async function syncMeal() {
-    mealinfo = await todayMeal();
-    document.getElementById("mealtext").innerHTML =
-    mealinfo[1][1];
+async function syncMeal(API_URL) {
+    mealinfo = await todayMeal(API_URL);
+    document.getElementById("mealtext").innerHTML = mealinfo[1][1];
 
-    document.getElementById("mealTime").innerHTML =
-    mealinfo[1][0];
+    document.getElementById("mealTime").innerHTML = mealinfo[1][0];
 }
 
-function syncdate(){ 
+function syncdate(){
+    today = new Date();
+    year = today.getFullYear();
+    month = String(today.getMonth() + 1).padStart(2, '0');
+    day = String(today.getDate()).padStart(2, '0');
+
     date = year + '-' + month + '-' + day
     document.getElementById("inputdate").value = date;
 }
 
-function syncdatee() {
-    datee = document.getElementById("inputdate").value;
-    datee = datee.replace(/-/g, '');
-    todaydate = datee;
-    todayMeal();
-    alert(todaydate);
+async function apply_meal() {
+    DATE = document.getElementById("inputdate").value.replace(/-/g, '');
+
+    API_URL = `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=${APIKey}&Type=json&ATPT_OFCDC_SC_CODE=${AOSC}&SD_SCHUL_CODE=${SSC}&MLSV_FROM_YMD=${DATE}&MLSV_TO_YMD=${DATE}`;
+
+    await syncMeal(API_URL);
 }
 
-syncMeal()
 syncdate()
+apply_meal()
