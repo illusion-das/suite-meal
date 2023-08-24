@@ -1,0 +1,38 @@
+급식표
+시간표
+타이머 스톱워치
+뽀모도로
+퀴즈
+설정
+
+<div style="height: 100%;background-color: blue;">
+            <div style="
+              width: 100%;
+              position: absolute;
+              top: 50%;
+              left: 88%;
+              transform: translateY(-50%);
+              display: flex;
+              background-color: red;">
+                <div style="width: 25px;height: 100px;
+                background-color: rgb(235, 107, 107);
+                border-radius: 20px;">
+
+                </div>
+            </div>
+          </div>
+
+
+
+
+<div style="border: 6px solid black;
+            width: 210px;height: 110px;
+            border-radius: 80px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);">
+              <layout-center style="font-size: 60px;font-weight: 600;">
+                점심
+              </layout-center>
+            </div>
