@@ -313,14 +313,23 @@ textarea:focus {
 }
 
 input[type='date'] {
-    border: none;
-    position: relative;
-    background: url(../../../assets/Calendar.svg) no-repeat right 10px center /
-      35px auto;
-  }
-  
-  input[type='date']::before {
+    border: 0px;
+    background: url(../../../assets/Calendar.svg) no-repeat right 10px center / 35px auto;
+    border-radius: 8px;
+    text-align: center;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+}
+
+input[type='date']::before {
     content: attr(placeholder);
     width: 100%;
     height: 100%;
-  }
+}

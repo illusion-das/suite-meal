@@ -8,6 +8,11 @@ const AOSC = "N10"
 // 이 곳에 표준학교 코드를 입력하세요.
 const SSC = "8140472"
 
+ftime = 0
+mealType = 0
+dayOfWeek = 10
+var week = new Array('일', '월', '화', '수', '목', '금', '토');
+
 // 정규식으로 알레르기 정보 제거
 function RX(item) {
     return item.replace(/\([^)]*\)/g, '');
@@ -30,11 +35,30 @@ async function todayMeal(API_URL) {
     return mealInfo;
 }
 
-async function syncMeal(API_URL) {
+async function syncMeal(API_URL, n) {
     mealinfo = await todayMeal(API_URL);
-    document.getElementById("mealtext").innerHTML = mealinfo[1][1];
 
-    document.getElementById("mealTime").innerHTML = mealinfo[1][0];
+    if  (mealinfo[1] == undefined){
+        mealinfo[1] = ['석식', '급식 없음']
+    }
+
+    if (ftime == 0){
+        ftime = 1;
+        document.getElementById("mealtext").innerHTML = mealinfo[mealType][1];
+        document.getElementById("mealTime").innerHTML = mealinfo[mealType][0];
+    }else{
+            if (n == 0){
+                document.getElementById("mealtext").innerHTML = mealinfo[mealType][1];
+            }else{
+                if (n == '중식'){
+                    mealType = 1
+                }else{
+                    mealType = 0
+                }
+                document.getElementById("mealtext").innerHTML = mealinfo[mealType][1];
+                document.getElementById("mealTime").innerHTML = mealinfo[mealType][0];
+            }
+        }
 }
 
 function syncdate(){
@@ -47,12 +71,20 @@ function syncdate(){
     document.getElementById("inputdate").value = date;
 }
 
-async function apply_meal() {
+async function apply_meal(n) {
     DATE = document.getElementById("inputdate").value.replace(/-/g, '');
 
     API_URL = `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=${APIKey}&Type=json&ATPT_OFCDC_SC_CODE=${AOSC}&SD_SCHUL_CODE=${SSC}&MLSV_FROM_YMD=${DATE}&MLSV_TO_YMD=${DATE}`;
 
-    await syncMeal(API_URL);
+    dayOfWeek = new Date(document.getElementById("inputdate").value).getDay();
+
+    if ((week[dayOfWeek] == '토') || (week[dayOfWeek] == '일')){
+        document.getElementById("mealtext").innerHTML = '주말입니다';
+    }
+    
+    else{
+        await syncMeal(API_URL, n);
+    }
 }
 
 syncdate()
