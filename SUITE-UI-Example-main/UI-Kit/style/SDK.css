@@ -1,4 +1,3 @@
-
 html,
 body {
     background: #FFF;
@@ -125,7 +124,8 @@ row-split {
 }
 
 margin-button-l,
-margin-button-r {
+margin-button-r,
+margin-button-c {
     height: calc(100% - 30px);
     display: flex;
     flex-direction: column;
@@ -143,6 +143,12 @@ margin-button-r {
     width: calc(100% - 22px);
     margin-left: 8px;
     margin-right: 14px;
+}
+
+margin-button-c {
+    width: calc(100% - 22px);
+    margin-left: 11px;
+    margin-right: 11px;
 }
 
 primary-button,
@@ -332,4 +338,149 @@ input[type='date']::before {
     content: attr(placeholder);
     width: 100%;
     height: 100%;
+}
+
+
+
+
+.option {
+    font-weight: 700;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0px;
+    background-color: #FFF;
+}
+
+li {
+    line-height: 50px;
+}
+
+.select {
+    width: 219px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    border: 4px solid black;
+}
+
+.selected {
+    display: inline-block;
+    font-size: 45px;
+}
+
+.select .selected {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.select ul li,
+.select .selected .selected-value {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.select ul {
+    width: 230px;
+    display: none;
+    position: absolute;
+    background: #fff;
+    margin: 0 0 0 0;
+    cursor: pointer;
+    border-radius: 30px;
+    border: 4px solid black;
+}
+
+.select.active ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.select ul li {
+    font-size: 20px !important;
+    height: 50px;
+}
+
+.select ul li:hover {
+    background: rgba(157, 157, 157, 0.35)
+}
+
+.stop-button-box {
+    display: flex;
+}
+
+.stopwatch-button {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    border: 0px;
+    margin: 10px;
+    font-family: 'SUITE Variable', sans-serif;
+    font-size: 20px;
+    border: 3px solid gray;
+}
+
+
+
+
+
+
+.fadein {
+    animation: fadein 1.5s;
+    -moz-animation: fadein 1.5s;
+    /* Firefox */
+    -webkit-animation: fadein 1.5s;
+    /* Safari and Chrome */
+    -o-animation: fadein 1.5s;
+    /* Opera */
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein {
+
+    /* Firefox */
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+
+    /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+
+    /* Opera */
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

@@ -29,7 +29,7 @@ async function todayMeal(API_URL) {
     mealData['row'].forEach(i => {
         mealTime = i['MMEAL_SC_NM'];
         mealList = RX(i['DDISH_NM']);
-        
+
         mealInfo.push([mealTime, mealList]);
     });
     return mealInfo;
@@ -38,30 +38,35 @@ async function todayMeal(API_URL) {
 async function syncMeal(API_URL, n) {
     mealinfo = await todayMeal(API_URL);
 
-    if  (mealinfo[1] == undefined){
+    if (mealinfo[1] == undefined) {
         mealinfo[1] = ['석식', '급식 없음']
     }
 
-    if (ftime == 0){
+    if (ftime == 0) {
         ftime = 1;
-        document.getElementById("mealtext").innerHTML = mealinfo[mealType][1];
-        document.getElementById("mealTime").innerHTML = mealinfo[mealType][0];
-    }else{
-            if (n == 0){
-                document.getElementById("mealtext").innerHTML = mealinfo[mealType][1];
-            }else{
-                if (n == '중식'){
-                    mealType = 1
-                }else{
-                    mealType = 0
-                }
-                document.getElementById("mealtext").innerHTML = mealinfo[mealType][1];
-                document.getElementById("mealTime").innerHTML = mealinfo[mealType][0];
+        document.getElementById("mealtext").innerHTML =
+            mealinfo[mealType][1];
+        document.getElementById("mealTime").innerHTML =
+            mealinfo[mealType][0];
+    } else {
+        if (n == 0) {
+            document.getElementById("mealtext").innerHTML =
+                mealinfo[mealType][1];
+        } else {
+            if (n == '중식') {
+                mealType = 1
+            } else {
+                mealType = 0
             }
+            document.getElementById("mealtext").innerHTML =
+                mealinfo[mealType][1];
+            document.getElementById("mealTime").innerHTML =
+                mealinfo[mealType][0];
         }
+    }
 }
 
-function syncdate(){
+function syncdate() {
     today = new Date();
     year = today.getFullYear();
     month = String(today.getMonth() + 1).padStart(2, '0');
@@ -78,11 +83,11 @@ async function apply_meal(n) {
 
     dayOfWeek = new Date(document.getElementById("inputdate").value).getDay();
 
-    if ((week[dayOfWeek] == '토') || (week[dayOfWeek] == '일')){
+    if ((week[dayOfWeek] == '토') || (week[dayOfWeek] == '일')) {
         document.getElementById("mealtext").innerHTML = '주말입니다';
     }
-    
-    else{
+
+    else {
         await syncMeal(API_URL, n);
     }
 }

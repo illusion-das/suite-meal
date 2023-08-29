@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timer</title>
+
+    <link rel="stylesheet" href="./style/SDK.css"> <!-- SDK 요소와 연결되어 있습니다. 제거하지 마세요. -->
+    <link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/variable/woff2/SUITE-Variable.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- 기본적인 레이아웃을 구성합니다. -->
+    <app-layout>
+
+        <!-- 이곳에는 일반적으로 정보를 표시합니다. -->
+        <content-area style="
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;">
+            <layout-center>
+                <div id="wrapper">
+                    <hr />
+                    <div id="display" class="remaining">----------</div>
+                </div>
+            </layout-center>
+        </content-area>
+
+        <!-- 이곳에는 기본적인 조작 요소가 배치됩니다. -->
+        <control-area>
+
+            <top-control>
+                <back-button>
+                    <back-button-icon></back-button-icon>
+                    <back-button-label>뒤로가기</back-button-label>
+                </back-button>
+            </top-control>
+
+            <middle-control>
+
+                <layout-split-7>
+                    <div style="position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);">
+                        <div style="
+            width: 320px;
+            height: 110px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);" onclick="">
+                            <layout-center style="font-size: 10px;font-weight: 600;">
+                                <form>
+                                    <label><input type="text" id="startMin" />분</label>
+                                    <label><input type="text" id="startSec" />초</label>
+                                    <input type="button" value="START" class="start-btn" onclick="startTimer()" // 타이머 시작 함수 />
+                                    <input type="button" value="RESET" class="reset-btn" onclick="resetTimer()" // 타이머 리셋 함수 />
+                                </form>
+                            </layout-center>
+                        </div>
+                    </div>
+                </layout-split-7>
+
+                <layout-split-4 style="z-index: 1;">
+
+
+                    <row-split>
+
+                        <margin-button-l>
+                            <secondary-button onclick="
+                location.replace('./time.html')
+            ">
+                                <button-label>세계시각</button-label>
+                            </secondary-button>
+                        </margin-button-l>
+
+                    </row-split>
+
+                    <row-split>
+                        <margin-button-c>
+                            <secondary-button onclick="
+                location.replace('./stopwatch.html')
+            ">
+                                <button-label>스톱워치</button-label>
+                            </secondary-button>
+                        </margin-button-c>
+
+                    </row-split>
+
+                    <row-split>
+                        <margin-button-r>
+                            <primary-button onclick="
+                
+            ">
+                                <button-label>타이머</button-label>
+                            </primary-button>
+                        </margin-button-r>
+
+                    </row-split>
+
+
+                </layout-split-4>
+
+            </middle-control>
+
+        </control-area>
+
+    </app-layout>
+
+    <script src="./script/SDK.js"></script> <!-- SDK 요소와 연결되어 있습니다. 제거하지 마세요. -->
+    <script src="./script/timer.js"></script>
+
+</body>
+
+</html>
